@@ -7,13 +7,10 @@ export async function showOpenFilePicker(options: OpenFilePickerOptions = {}): P
   const input = document.createElement('input');
   input.type = 'file';
   input.multiple = opts.multiple;
-  // input.accept = (opts.types || [])
-  //   .map((e) => [
-  //     ...(e.extensions || []).map((e) => '.' + e),
-  //     ...(e.mimeTypes || []),
-  //   ])
-  //   .flat()
-  //   .join(',');
+  input.accept = (opts.types || [])
+    .map((type) => Object.values(type.accept))
+    .flat()
+    .join(',');
 
   // See https://stackoverflow.com/questions/47664777/javascript-file-input-onchange-not-working-ios-safari-only
   input.style.position = 'fixed';
